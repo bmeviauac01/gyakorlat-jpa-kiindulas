@@ -43,8 +43,8 @@ public class WebshopApplication{
 				ContextResource resource = new ContextResource();
 				resource.setName("jdbc/termekDB");
 				resource.setType(DataSource.class.getName());
-				resource.setProperty("driverClassName", "oracle.jdbc.OracleDriver");
-				resource.setProperty("url", "jdbc:oracle:thin:@mzperx.aut.bme.hu:1521:orcl");
+				resource.setProperty("driverClassName", "com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				resource.setProperty("url", "jdbc:sqlserver://localhost;database=adatvez");
 				resource.setProperty("username", connectionProperties.getUsername());
 				resource.setProperty("password", connectionProperties.getPassword());
 				resource.setProperty("factory", "org.apache.tomcat.jdbc.pool.DataSourceFactory");
