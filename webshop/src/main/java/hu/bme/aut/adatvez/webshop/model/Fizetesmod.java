@@ -19,12 +19,11 @@ import java.util.List;
 @NamedQuery(name="Fizetesmod.findAll", query="SELECT f FROM Fizetesmod f")
 @NamedStoredProcedureQueries({
 	@NamedStoredProcedureQuery(name = "fizModSP", 
-			procedureName = "FizetesModLetrehozasa",
+			procedureName = "FizetesModLetrehozasa",			
 			parameters = {
-	        	@StoredProcedureParameter(mode = ParameterMode.IN, name = "p_mod", type = String.class),
-	        	@StoredProcedureParameter(mode = ParameterMode.IN, name = "p_hatarido", type = BigDecimal.class),
-	        	@StoredProcedureParameter(mode = ParameterMode.OUT, name = "CurrentId", type = Long.class)
-	        })	  
+	        	@StoredProcedureParameter(mode = ParameterMode.IN, name = "Mod", type = String.class),
+	        	@StoredProcedureParameter(mode = ParameterMode.IN, name = "Hatarido", type = BigDecimal.class)	        	
+	        })  
 })
 public class Fizetesmod implements Serializable {
 	private static final long serialVersionUID = 1L;
