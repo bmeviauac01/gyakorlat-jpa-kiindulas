@@ -1,8 +1,8 @@
 package hu.bme.aut.adatvez.webshop.web;
 
-import hu.bme.aut.adatvez.webshop.dao.TermekRepository;
-import hu.bme.aut.adatvez.webshop.model.Fizetesmod;
-import hu.bme.aut.adatvez.webshop.model.Termek;
+import hu.bme.aut.adatvez.webshop.dao.ProductRepository;
+import hu.bme.aut.adatvez.webshop.model.Paymentmethod;
+import hu.bme.aut.adatvez.webshop.model.Product;
 
 import java.util.List;
 import java.util.Map;
@@ -19,56 +19,56 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class WebshopController {
 
-	private static final String UJ_FIZETESMOD_KEY = "fizetesmod";
+	private static final String NEW_PAYMENTMETHOD_KEY = "paymentmethod";
 
 	@Autowired
-	TermekRepository termekRepository;
+	ProductRepository productRepository;
 	
 	
 	@RequestMapping("/")
 	public String home(Map<String, Object> model) {
 
-		model.put("termekek30Folott", findTermekek30Folott());
-		model.put("legalabbKetszerRendeltTermekek",
-				findLegalabbKetszerRendeltTermekek());
-		model.put("legdragabbTermekek", findLegdragabbTermekek());		
-		model.putIfAbsent(UJ_FIZETESMOD_KEY, new Fizetesmod());
-		model.put("epitoElemek", findEpitolemek());
-		model.put("dragaJatekok", findDragaJatekok());
+		model.put("productsOver30", findProductsOver30());
+		model.put("productsOrderedAtLeastTwice",
+				findProductsOrderedAtLeastTwice());
+		model.put("mostExpensiveProducts", findMostExpensiveProducts());		
+		model.putIfAbsent(NEW_PAYMENTMETHOD_KEY, new Paymentmethod());
+		model.put("buildingItems", findBuildingItems());
+		model.put("expensiveToys", findExpensiveToys());
 		return "testPage";
 	}
 
 
-	// 4.a feladat
-	private List<Termek> findTermekek30Folott() {
+	// Task 4.a
+	private List<Product> findProductsOver30() {
 		// TODO
 		return null;
 	}
 
-	// 4.b feladat
-	private List<Termek> findLegalabbKetszerRendeltTermekek() {
+	// Task 4.b
+	private List<Product> findProductsOrderedAtLeastTwice() {
 		// TODO
 		return null;
 	}
 
-	// 4.c feladat
-	private List<Termek> findLegdragabbTermekek() {
+	// Task 4.c
+	private List<Product> findMostExpensiveProducts() {
 		// TODO
 		return null;
 	}
 
-	// 5.a feladat
-	@RequestMapping(value = "/epitoElemekDragit", method = {RequestMethod.POST, RequestMethod.GET })
-	private String epitoElemekDragit() {
+	// Task 5.a
+	@RequestMapping(value = "/raisePriceOfBuildingItems", method = {RequestMethod.POST, RequestMethod.GET })
+	private String raisePriceOfBuildingItems() {
 
 		// TODO
 		
 		return "redirect:/";
 	}
 
-	// 5.b feladat
-	@RequestMapping(value = "/dragaTermekbeAtsorol", method = {RequestMethod.POST, RequestMethod.GET })
-	private String dragaTermekbeAtsorol() {
+	// Task 5.b
+	@RequestMapping(value = "/moveToExpensiveToys", method = {RequestMethod.POST, RequestMethod.GET })
+	private String moveToExpensiveToys() {
 
 		// TODO
 		
@@ -76,29 +76,28 @@ public class WebshopController {
 	}
 
 
-	//6. feladat
-	@RequestMapping(value = "/ujFizetesiMod", method = {RequestMethod.POST, RequestMethod.GET })
-	private String ujFizetesiMod(@Valid Fizetesmod fizetesmod, BindingResult errors, RedirectAttributes redirectAttributes) {
+	//Task 6.
+	@RequestMapping(value = "/newPaymentMethod", method = {RequestMethod.POST, RequestMethod.GET })
+	private String newPaymentMethod(@Valid Paymentmethod paymentmethod, BindingResult errors, RedirectAttributes redirectAttributes) {
 
 		if(!errors.hasErrors()){
-			Long ujId = null;
 			// TODO
 
-			redirectAttributes.addFlashAttribute("ujId", ujId);
+			redirectAttributes.addFlashAttribute("success", true);
 		}else{
-			redirectAttributes.addFlashAttribute(UJ_FIZETESMOD_KEY, fizetesmod);
-			redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + UJ_FIZETESMOD_KEY, errors);
+			redirectAttributes.addFlashAttribute(NEW_PAYMENTMETHOD_KEY, paymentmethod);
+			redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + NEW_PAYMENTMETHOD_KEY, errors);
 		}
 		
 		return "redirect:/";
 	}
 	
-	private List<Termek> findEpitolemek() {
-		return termekRepository.findByKategoriaNev("Építő elemek");
+	private List<Product> findBuildingItems() {
+		return productRepository.findByCategoryName("Building items");
 	}
 
-	private  List<Termek> findDragaJatekok() {
-		return termekRepository.findByKategoriaNev("Drága játékok");
+	private  List<Product> findExpensiveToys() {
+		return productRepository.findByCategoryName("Expensive toys");
 	}
 
 }
