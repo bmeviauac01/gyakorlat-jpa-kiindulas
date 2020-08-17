@@ -25,6 +25,7 @@ public class Customersite implements Serializable {
 
 	private String tel;
 
+	@Column(name = "zipcode")
 	private String zip;
 
 	//bi-directional many-to-one association to Customer

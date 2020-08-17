@@ -29,7 +29,7 @@ public class Customer implements Serializable {
 
 	//bi-directional many-to-one association to Customersite
 	@ManyToOne
-	@JoinColumn(name="MAINCUSTOMERSITE")
+	@JoinColumn(name="MAINCUSTOMERSITEID")
 	private Customersite customersite;
 
 	//bi-directional many-to-one association to Customersite
