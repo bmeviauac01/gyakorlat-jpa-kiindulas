@@ -78,14 +78,14 @@ public class WebshopController {
 
 	//Task 6.
 	@RequestMapping(value = "/newPaymentMethod", method = {RequestMethod.POST, RequestMethod.GET })
-	private String newPaymentMethod(@Valid Paymentmethod paymentmethod, BindingResult errors, RedirectAttributes redirectAttributes) {
+	private String newPaymentMethod(@Valid Paymentmethod paymentMethod, BindingResult errors, RedirectAttributes redirectAttributes) {
 
 		if(!errors.hasErrors()){
 			// TODO
 
 			redirectAttributes.addFlashAttribute("success", true);
 		}else{
-			redirectAttributes.addFlashAttribute(NEW_PAYMENTMETHOD_KEY, paymentmethod);
+			redirectAttributes.addFlashAttribute(NEW_PAYMENTMETHOD_KEY, paymentMethod);
 			redirectAttributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + NEW_PAYMENTMETHOD_KEY, errors);
 		}
 		
