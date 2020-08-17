@@ -24,8 +24,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @NamedQuery(name="Paymentmethod.findAll", query="SELECT p FROM Paymentmethod p")
 @NamedStoredProcedureQueries({
-	@NamedStoredProcedureQuery(name = "paymentMehodSP", 
-			procedureName = "CreatePaymentMethod",
+	@NamedStoredProcedureQuery(name = "createMethodSP", 
+			procedureName = "CreateNewPaymentMethod",
 			parameters = {
 			        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Method", type = String.class),
 	                @StoredProcedureParameter(mode = ParameterMode.IN, name = "Deadline", type = BigDecimal.class)
