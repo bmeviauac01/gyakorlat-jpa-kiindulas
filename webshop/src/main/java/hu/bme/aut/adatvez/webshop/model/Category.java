@@ -103,6 +103,9 @@ public class Category implements Serializable {
 	}
 
 	public Product addProduct(Product product) {
+		Category oldCategory = product.getCategory();
+		if(oldCategory != null)
+			oldCategory.removeProduct(product);
 		getProducts().add(product);
 		product.setCategory(this);
 
